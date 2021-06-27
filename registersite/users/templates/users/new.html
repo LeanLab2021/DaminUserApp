@@ -1,0 +1,41 @@
+{% extends "users/layout.html" %}{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h3 class="text-center">ユーザーを登録</h3>
+          <form action="{% url 'new' %}" 　class="form-signin" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="name">{{form.name.label}}</label>:
+              <input class="form-control" type="text" name="name" />
+            </div>
+            <div class="form-group">
+              <label for="birthday">{{form.birthday.label}}</label>:
+              <input class="form-control" type="date" name="birthday" />
+            </div>
+
+            <div class="form-group">
+              <label for="gender">{{form.gender.label}}</label>:
+              <select class="form-control" name="gender" id="gender">
+                <option value="Male">男性</option>
+                <option value="Female">女性</option>
+                <option value="Other">その他</option>
+              </select>
+            </div>
+            {% if err_msg %}
+            <h5 class="text-center text-danger">{{err_msg}}</h5>
+            <p class="text-danger">{{form.errors}}</p>
+            {% endif %}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">
+              登録
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
